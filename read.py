@@ -4,7 +4,6 @@ import numpy as np
 import sys
 import os
 
-
 class Read:
 
     # def __init__(self, inputs, samples):
@@ -12,6 +11,7 @@ class Read:
         self.INPUTS = inputs
         self.SAMPLES = samples
         self.DEBUG = debug
+        # self.DEBUG = debug
         # File paths
         self.path = os.path.dirname(os.path.realpath(__file__))
         self.data_raw = self.path + "/data/rawdata/GMM_data_fall2019.txt"
