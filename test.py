@@ -156,3 +156,53 @@ if arg == 'plot':
     print(y.shape)
     scatter = ax.scatter(x,y)
     plt.savefig("test_scatter.png")
+
+if arg == 'sum':
+
+    a = np.array([[0,0,0],
+                  [0,0,1],
+                  [0,1,0],
+                  [0,1,1],
+                  [1,0,0],
+                  [1,0,1],
+                  [1,1,0],
+                  [1,1,1]])
+    print("a: %sx%s" % a.shape)
+    print(np.sum(a, axis=0))
+    print(np.sum(a, axis=1))
+
+if arg == 'tuple':
+    a = np.array([[0,0],
+                  [0,0],
+                  [0,1],
+                  [0,1]])
+    b = np.array([[1,0],
+                  [1,0],
+                  [1,1],
+                  [1,1]])
+    centroids = []
+    # a = np.array([(0,0),
+    #               (0,0),
+    #               (0,1),
+    #               (0,1)])
+    # b = np.array([(1,0),
+    #               (1,0),
+    #               (1,1),
+    #               (1,1)])
+    print(a)
+    print()
+    print(b)
+    print()
+    centroids.append(a)
+    # print(centroids)
+    centroids.append(b)
+    print(centroids)
+    print()
+    print(centroids[0])
+    print()
+    print(centroids[1])
+    # import pdb; pdb.set_trace()
+    # a = np.append(a, b, axis=0)
+    # a = np.vstack((a, b))
+    # a = np.concatenate(a, b)
+
