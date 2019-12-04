@@ -1,7 +1,8 @@
 import numpy as np
+import matplotlib.pyplot as plt
+from read import Read
 import os
 import sys
-from read import Read
 # from random import choices
 # from random import random
 import random
@@ -126,4 +127,32 @@ if arg == 'clusters':
 if arg == 'read':
     obj = Read(2, 1500)
     data = obj.read_raw()
-    print((data==-.1695138).any())
+    # print((data==-.1695138).any())
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    predicts = np.array([0,1,2,3])
+    scatter = ax.scatter(data[:,0], data[:,1], s=5)
+    plt.savefig("test_scatter_GMM.png")
+
+if arg == 'plot':
+    data      = np.array([[ -4  , 3.4 ],
+                          [  3  , 5.2 ],
+                          [  1.4, 5   ],
+                          [  3.2, 6.1 ],
+                        ])
+    centroids = np.array([[  1   ,   .5 ],
+                          [ -7.1 ,  2.7 ],
+                          [  -.21, 13   ],
+                        ])
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    x = data[:,0]
+    y = data[:,1]
+    print("x")
+    print(x)
+    print(x.shape)
+    print("y")
+    print(y)
+    print(y.shape)
+    scatter = ax.scatter(x,y)
+    plt.savefig("test_scatter.png")

@@ -1,11 +1,11 @@
 # train.py assumes data sits in "./data/rawdata/"
 
 import numpy as np
+import matplotlib.pyplot as plt
 from read import Read
 import sys
 import os
 import argparse
-# np.set_printoptions(threshold=sys.maxsize)
 
 parser = argparse.ArgumentParser(description="K-means clustering")
 parser.add_argument('--debug', action='store_true',
@@ -22,8 +22,15 @@ class Kmean:
         self.TIMES = r
         self.DEBUG = args["debug"]
         self.data = self.load()
-        self.centroids = self.init_centroids()
+        if self.DEBUG == True:
+            np.set_printoptions(threshold=sys.maxsize)
+            self.centroids = np.array([[-2,-2],[-2,2],[2,2],[2,-2]])
+        else:
+            self.centroids = self.init_centroids()
+        # Array to hold clusters
         self.clusters = [np.zeros(2)] * self.K
+        # Array to hold predictions
+        self.predicts = np.zeros(self.SAMPLES)
     
     def load(self):
         read = Read(self.INPUTS, self.SAMPLES, debug=self.DEBUG)
@@ -48,6 +55,10 @@ class Kmean:
     # to each centroid. Get index of min val, then add x to cluster
     # array at that index.
     def assignment(self):
+        if self.DEBUG == True:
+            print("predicts: %s" % self.predicts.shape)
+        i = 0
+        # for x in range(self.data):
         for x in self.data:
             # Calculate norms
             norm = np.linalg.norm(x-self.centroids, axis=1)
@@ -55,19 +66,38 @@ class Kmean:
             index, = np.where(norm<=np.amin(norm))
             # Convert to int to use as index
             index = int(index)
+
+            self.predicts[i] = index
+
             # If the cluster at index is empty, set to x
             if (self.clusters[index]==0).any():
                 self.clusters[index] = x
             # Else, we just stack x at index
             else:
                 self.clusters[index] = np.vstack((self.clusters[index], x))
+            
+            i += 1
+
         # Check that we are using all our data
         if self.DEBUG == True:
             total = 0
             for c in self.clusters:
                 total += c.shape[0]
                 print(c.shape)
-            print(total)
+            print("total in clusters:", total)
+            print("data:", self.data.shape)
+            print(self.predicts)
+        self.plot()
+    
+    # https://jakevdp.github.io/PythonDataScienceHandbook/05.11-k-means.html
+    # https://stackoverflow.com/questions/31137077/how-to-make-a-scatter-plot-for-clustering-in-python
+    def plot(self):
+        fig = plt.figure(figsize=(7,6))
+        # fig = plt.figure()
+        ax = fig.add_subplot(111)
+        scatter = ax.scatter(self.data[:,0], self.data[:,1], c=self.predicts, s=5)
+        plt.scatter(self.centroids[:,0],self.centroids[:,1], c='black', s=100, alpha=0.5)
+        plt.savefig("kmeans_scatter_GMM3.png")
     
     def test(self):
         print("\nself.centroids:\n%s" % self.centroids)
@@ -75,7 +105,7 @@ class Kmean:
 def main():
     inputs = 2
     samples = 1500
-    clusters = 3
+    clusters = 4
     times = 10
 
     run = Kmean(inputs, samples, clusters, times)
