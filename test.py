@@ -47,10 +47,10 @@ if arg == 'norm':
                     #  [1.4, 5]])
     centroids = np.array([[1,   .5],
                           [-7.1, 2.77]])
-    # diff = 
-    # square = np.square(diff)
-    # sums = np.sum(square, axis=1)
-    # root = np.sqrt(sums)
+    diff = data-centroids
+    square = np.square(diff)
+    sums = np.sum(square, axis=1)
+    root = np.sqrt(sums)
     norm = np.linalg.norm(data-centroids, axis=1)
     print("data")
     print(data)
@@ -64,8 +64,8 @@ if arg == 'norm':
     # print(square.shape)
     # print("sums")
     # print(sums)
-    # print("root")
-    # print(root)
+    print("root")
+    print(root)
     print("norm")
     print(norm)
     # norm = np.sqrt()
@@ -206,3 +206,17 @@ if arg == 'tuple':
     # a = np.vstack((a, b))
     # a = np.concatenate(a, b)
 
+if arg == 'var':
+    data      = np.array([[ -4  , 3.4 ],
+                          [  3  , 5.2 ],
+                          [  1.4, 5   ],
+                          [  3.2, 6.1 ],
+                        ])
+    centroids = np.array([[  1   ,   .5 ],
+                          [ -7.1 ,  2.7 ],
+                          [  -.21, 13   ],
+                        ])
+    var = np.var(data, axis=0)
+    print("var",var)
+    mult = data.shape[0]*var
+    print("mult",mult)
