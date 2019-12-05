@@ -47,15 +47,22 @@ if arg == 'norm':
                     #  [1.4, 5]])
     centroids = np.array([[1,   .5],
                           [-7.1, 2.77]])
-    diff = data-centroids
+    mean = np.mean(data, axis=0)
+    # diff = data-centroids
+    diff = data-mean
     square = np.square(diff)
     sums = np.sum(square, axis=1)
     root = np.sqrt(sums)
-    norm = np.linalg.norm(data-centroids, axis=1)
+    print("mean",mean)
+    print("data-mean",diff)
+    norm = np.linalg.norm(data-mean, axis=1)
+    # norm = np.linalg.norm(data-centroids, axis=1)
     print("data")
     print(data)
-    print("centroids")
-    print(centroids)
+    print("mean")
+    print(mean)
+    # print("centroids")
+    # print(centroids)
     # print("diff")
     # print(diff)
     # print("square")
@@ -220,3 +227,28 @@ if arg == 'var':
     print("var",var)
     mult = data.shape[0]*var
     print("mult",mult)
+    # sums = np.sum()
+
+if arg == 'for':
+    for x in range(3):
+        print(x)
+    else:
+        print('Final x = %d' % (x))
+    
+    data = np.array([[-4.0, 3.4],
+                     [ 3.0, 5.2],
+                     [ 1.4, 5.0],
+                     [ 3.2, 6.1],
+                    ])
+    for index, item in enumerate(data):
+        print(index, item)
+
+if arg == 'wcss':
+    data = np.array([[-4.0, 3.4],
+                     [ 3.0, 5.2],
+                     [ 1.4, 5.0],
+                     [ 3.2, 6.1],
+                    ])
+    # for i, x in enumerate(data):
+    norm = np.linalg.norm(data-np.mean(data, axis=1))
+    print(norm)
