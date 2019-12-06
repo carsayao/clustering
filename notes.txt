@@ -1,0 +1,31 @@
+c-mean
+coloring plots:
+  array for labels
+  array for membership grade
+ 
+wcss:
+  generate array of argmax membership grades for each datapoint (also for plotting)
+ 
+assignment (weight computation):
+  get norms from x to clusters
+  
+(Pdb) p self.grades
+array([[ 3.25364879,  4.24059654,  4.92633852,  3.93939078],
+       [ 1.1550398 , 17.95642962, 36.38748473, 19.5860949 ],
+       [ 9.95816478,  5.67327393,  1.78987148,  6.07476233],
+       ...,
+       [32.75198997, 22.40503932,  1.19306163, 11.54001228],
+       [12.11332817, 12.43831717,  2.56283951,  2.23785051],
+       [29.16142765, 19.45276914,  1.21542028, 10.9240788 ]])
+(Pdb) n
+> /home/meegs/Projects/clustering/cmeans.py(99)assignment()
+-> index, = np.where(norm<=np.amin(norm))
+(Pdb) p self.grades
+array([[0.30734725, 0.23581588, 0.20299052, 0.25384636],
+       [0.86577104, 0.05569036, 0.02748198, 0.05105663],
+       [0.10042011, 0.17626507, 0.55869933, 0.16461549],
+       ...,
+       [0.0305325 , 0.04463282, 0.83817967, 0.08665502],
+       [0.0825537 , 0.08039673, 0.3901922 , 0.44685737],
+       [0.03429187, 0.05140656, 0.82276066, 0.0915409 ]])
+

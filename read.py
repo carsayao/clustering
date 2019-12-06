@@ -5,9 +5,13 @@ import sys
 import os
 
 class Read:
-    def __init__(self, inputs, samples):
+    def __init__(self, inputs, start, end):
+    # def __init__(self, inputs, samples):
         self.INPUTS = inputs
-        self.SAMPLES = samples
+        self.SAMPLES = end-start
+        self.start = start
+        self.end = end
+        # self.SAMPLES = samples
         # File paths
         self.path = os.path.dirname(os.path.realpath(__file__))
         self.data_raw = self.path + "/data/rawdata/GMM_data_fall2019.txt"
@@ -17,4 +21,5 @@ class Read:
     def read_raw(self):
         # Read data into x
         train_set = np.loadtxt(fname=self.data_raw)
-        return train_set[:self.SAMPLES]
+        return train_set[self.start:self.end]
+        # return train_set[:self.SAMPLES]

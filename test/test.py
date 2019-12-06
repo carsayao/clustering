@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from read import Read
+# from ..read import Read
 import os
 import sys
 # from random import choices
@@ -252,3 +252,30 @@ if arg == 'wcss':
     # for i, x in enumerate(data):
     norm = np.linalg.norm(data-np.mean(data, axis=1))
     print(norm)
+
+if arg == 'rand':
+    grades = np.random.rand((self.SAMPLES, self.K))
+    print(grades)
+
+if arg == 'weight':
+    x = np.array([.4, .5])
+    centroids = np.array()
+    norm = np.linalg.norm(x-self.centroids, axis=1)
+
+if arg == 'axis':
+    a = np.array([0,1,2,3,4,5,6,7,8,9])
+    print("a")
+    print(a.shape)
+    print(a)
+    b = a[:,np.newaxis]
+    print("b")
+    print(b.shape)
+    print(b)
+    c = np.arange(20).reshape(10,2)
+    print("c")
+    print(c.shape)
+    print(c)
+    d = b * c
+    print("d")
+    print(d.shape)
+    print(d)

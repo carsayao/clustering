@@ -14,11 +14,14 @@ args = parser.parse_args()
 args = vars(args)
 PLOT = args["plot"]
 
+
 class Kmean:
-    def __init__(self, f, n, k):
+    def __init__(self, f, start, end, k):
         # Number of features
         self.INPUTS = f
-        self.SAMPLES = n
+        self.SAMPLES = end-start
+        self.start = start
+        self.end = end
         # Number of clusters
         self.K = k
         # Initialize our data
@@ -32,7 +35,8 @@ class Kmean:
     
     # Load self.SAMPLES number of datapoints with help from Read class
     def load(self):
-        read = Read(self.INPUTS, self.SAMPLES, debug=self.DEBUG)
+        read = Read(self.INPUTS, self.start, self.end)
+        # read = Read(self.INPUTS, self.SAMPLES)
         x = read.read_raw()
         return x
 
@@ -140,6 +144,7 @@ class Kmean:
     # https://jakevdp.github.io/PythonDataScienceHandbook/05.11-k-means.html
     # https://stackoverflow.com/questions/31137077/how-to-make-a-scatter-plot-for-clustering-in-python
     def plot(self, instance, num, data):
+        print("saving fig...")
         fig = plt.figure(figsize=(7,6))
         ax = fig.add_subplot(111)
         title_inf = "K " + str(self.K) + "; instance " + instance + "; iteration " + num + "; " + data
@@ -151,15 +156,18 @@ class Kmean:
         plt.savefig("data/" + str(self.K) + "_" + instance + "_" + num + ".png")
         plt.close(fig)
     
+
 def main():
     # Features
     inputs = 2
     # Number of samples
-    samples = 1500
+    samples = 500
+    start = 0
+    end = 1500
     # Number of clusters
-    clusters = 12
+    clusters = 5
     # How many times to execute with randomly initialized centroids
-    times = 10
+    times = 3
     # Stopping condition
     stopping = 0
     # Hold list of initialized centroids of each k
@@ -167,20 +175,28 @@ def main():
     # Hold array of wcss for each k
     wcss_list = []
 
-    print("\nRunning k-means with inputs=%s, samples=%s, clusters=%s, %s times, and stopping condition=%s\n"
+    print(("\nRunning k-means with inputs=%s, start=%s, end=%s "
+           "clusters=%s, %s times, and stopping condition=%s\n"
       %
-    (inputs, samples, clusters, times, stopping))
+    (inputs, start, end, clusters, times, stopping)))
+
+    # print(("\nRunning k-means with inputs=%s, samples=%s, "
+    #        "clusters=%s, %s times, and stopping condition=%s\n"
+    #   %
+    # (inputs, samples, clusters, times, stopping)))
 
     # Run new instance of kmean according to params above
     for i in range(times):
-        run = Kmean(inputs, samples, clusters)
+        run = Kmean(inputs, start, end, clusters)
+        # run = Kmean(inputs, samples, clusters)
         initial_centroids, wcss = run.kmean(str(i+1), stopping)
         centroids.append(initial_centroids)
         wcss_list.append(wcss)
     
     # Get index of our minimum wcss and print
     index_min = np.argmin(wcss_list)
-    print("initialized points with minimum wcss")
+    print("initialized points with minimum wcss: %s, wcss: %s"
+      % (index_min, wcss_list[index_min]))
     print(centroids[index_min])
 
 if __name__ == "__main__":
