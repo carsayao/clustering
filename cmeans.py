@@ -31,28 +31,18 @@ class Cmean:
         self.M = m
         # Initialize our data
         self.data = self.load()
-
-        # Constant centroids for debugging
-        if self.DEBUG == True:
-            self.K = 4
-            # np.set_printoptions(threshold=sys.maxsize)
-            self.centroids = np.array([[-2,-2],[-2,2],[2,2],[2,-2]])
-        else:
-            # Randomly initialize k centroids
-            self.centroids = self.init_centroids()
-
-        # Array to hold clusters of assigned datapoint
-        # self.clusters = [np.zeros(2)] * self.K
+        # Randomly initialize k centroids
+        self.centroids = self.init_centroids()
         # Array to hold max grades
         self.predicts = np.zeros((self.SAMPLES, 2))
         # Array to hold membership grades
-        # self.grades = np.zeros((self.SAMPLES, self.K))
-        self.grades = np.random.randint(0, high=1, size=(self.SAMPLES, self.K))
+        self.grades = np.zeros((self.SAMPLES, self.K))
+        # self.grades = np.random.randint(0, high=1, size=(self.SAMPLES, self.K))
+        # self.grades = np.random.random_sample((self.SAMPLES, self.K))
     
     # Load self.SAMPLES number of datapoints with help from Read class
     def load(self):
         read = Read(self.INPUTS, self.start, self.end)
-        # read = Read(self.INPUTS, self.SAMPLES)
         x = read.read_raw()
         return x
 
@@ -68,7 +58,7 @@ class Cmean:
             centroids[k] = self.data[int(guesses[k])]
         # We will run into our randomly selected centroids when computing
         # weight updates. Calculating the norm will cause divide by zeros. 
-        centroids += 0.00001
+        centroids += 0.0000001
         return centroids
     
     # Use L2 norm: sqrt(sum(square(xi-yi)))
@@ -76,42 +66,29 @@ class Cmean:
     # For each data point (x), generate arrays of Euclidean norm
     # to each centroid.
     def assignment(self):
-
-
-        # Build norm_mat
+        # Hold onto prev weights to calculate stopping condition
+        new_grades = np.zeros((self.SAMPLES, self.K))
+        # Get norms for each data point to centroids
         for i, x in enumerate(self.data):
             # Calculate norms
             norm = np.linalg.norm(x-self.centroids, axis=1)
+            # For each column of our weights
             for j in range(self.K):
+                # For each centroid
                 for k in range(self.K):
-                    self.grades[i][j] += (norm[j]/norm[k])**(2/(self.M-1))
-            # import pdb; pdb.set_trace()
-            # norm_mat[i] = norm
+                    # Sum norm diffs and raise to our exponent
+                    new_grades[i][j] += ((norm[j]/norm[k])**(2/(self.M-1)))
             # Get index of max grade
-            self.grades[i] = 1/self.grades[i]
-            index, = np.where(self.grades[i]>=np.amax(self.grades[i]))
-            # print(i)
-            # print(norm)
-            # print(self.grades[i])
-            # print(index)
+            new_grades[i] = 1/new_grades[i]
+            index, = np.where(new_grades[i]>=np.amax(new_grades[i]))
             index = int(index)
             # print(self.grades[i][index])
             # Holding predictions array will help us color our plot
             self.predicts[i][0] = index
-            self.predicts[i][1] = self.grades[i][index]
-            # self.predicts[i][1] = np.amax(self.grades[i])
-        
-        i = 0
-        # Use norm_mat to calculate weights
-        # for i in range(self.data.shape[0]):
-        #     for j in range(self.K):
-        #         for k in range(self.K):
-        #             self.grades[i][j] += (norm_mat[i][j]/norm_mat[i][k])**(2/(self.M-1))
-                    # import pdb; pdb.set_trace()
-
-        # import pdb; pdb.set_trace()
-
-
+            self.predicts[i][1] = new_grades[i][index]
+        diff = np.absolute(new_grades-self.grades)
+        self.grades[:] = new_grades[:]
+        return np.amax(diff)
     
     # Update centroids
     def update(self):
@@ -123,7 +100,7 @@ class Cmean:
 
         # Perform update step on all centroids (slide 36 of lecture 9)
         for k in range(self.K):
-        # for k in range(len(self.clusters)):
+            print(k)
             dividend = np.sum((self.grades[:,k][:,np.newaxis] * (self.data**self.M) * self.data), axis=0)
             divisor  = np.sum((self.grades[:,k][:,np.newaxis] * (self.data**self.M)), axis=0)
             # print("dividend", dividend.shape)
@@ -131,19 +108,15 @@ class Cmean:
             # print("divisor", divisor.shape)
             # print(divisor)
             new_centroids[k] = dividend/divisor
-            
 
-            # new_centroids[k] = ((1/self.clusters[k].shape[0])
-            #                  *  (np.sum(self.clusters[k], axis=0)))
         # Hold onto summed distance from new centroids to previous
         #   (used to evaluate stopping condition)
         d = np.linalg.norm(new_centroids-self.centroids, axis=1)
         d_sum = np.sum(d)
         # Update our centroids
-        self.centroids = new_centroids
-        # Reset clusters (because assignment() will keep stacking)
-        # self.clusters = [np.zeros(2)] * self.K
-        self.grades = np.zeros((self.SAMPLES, self.K))
+        self.centroids[:] = new_centroids[:]
+        # Reset weights
+        # self.grades = np.zeros((self.SAMPLES, self.K))
         # Return summed distances so cmeans() can check for stopping condition
         return d_sum
         
@@ -168,7 +141,7 @@ class Cmean:
 
     # Run cmean() until distance between new centroids and previous are less
     #   than stopping condition.
-    def cmean(self, instance, stopping=0.0001):
+    def cmean(self, instance, stopping=0.02):
         mode = 'C'
         print("*** cmean on instance %s ***" % instance)
         # Hold onto randomly initialized centroids to output them later
@@ -176,21 +149,20 @@ class Cmean:
         # Hold our iteration number
         i = 0
         # Assign initial data points, plot, then update
-        self.assignment()
+        coeff_distance = self.assignment()
         if PLOT == True:
             self.plot(instance, str(i), " m " + str(self.M) + " d= initialized", mode)
-        centroid_distance = self.update()
         # Don't stop until we've reached our stopping condition
-        while centroid_distance > stopping:
-            print("D",centroid_distance)
+        while coeff_distance > stopping:
+            self.update()
+            print("D",coeff_distance)
             i += 1
-            self.assignment()
             if PLOT == True:
-                self.plot(instance, str(i), " m " + str(self.M) + " d=" + str(round(centroid_distance, 4)), mode)
-            centroid_distance = self.update()
+                self.plot(instance, str(i), " m " + str(self.M) + " d=" + str(round(coeff_distance, 4)), mode)
+            coeff_distance = self.assignment()
         i += 1
         if PLOT == True:
-            self.plot(instance, str(i), " m " + str(self.M) + " d=" + str(round(centroid_distance, 4)), mode)
+            self.plot(instance, str(i), " m " + str(self.M) + " d=" + str(round(coeff_distance, 4)), mode)
 
         # Get wcss value for instance
         wcss = self.wcss()
@@ -211,6 +183,10 @@ class Cmean:
                              c=self.predicts[:,0], s=5)
         # scatter = ax.scatter(self.data[:,0], self.data[:,1],
         #                      c=self.predicts[:,0], s=5, alpha=self.predicts[:,1])
+
+        legend = ax.legend(*scatter.legend_elements(), loc="lower left")
+        ax.add_artist(legend)
+
         plt.scatter(self.centroids[:,0],self.centroids[:,1],
                     c='black', s=100, alpha=0.5)
         plt.savefig("data/" + mode + "_" + str(self.K) + "_" + instance + "_" + num + ".png")
@@ -225,12 +201,12 @@ def main():
     start = 0
     end = 1500
     # Number of clusters
-    clusters = 2
+    clusters = 7
     m = 2
     # How many times to execute with randomly initialized centroids
-    times = 2
+    times = 4
     # Stopping condition
-    stopping = .01
+    stopping = .02
     # Hold list of initialized centroids of each k
     centroids = []
     # Hold array of wcss for each k
@@ -240,11 +216,6 @@ def main():
            "clusters=%s, m=%s, %s times, and stopping condition=%s\n"
       %
     (inputs, start, end, clusters, m, times, stopping)))
-
-    # print(("\nRunning k-means with inputs=%s, samples=%s, "
-    #        "clusters=%s, %s times, and stopping condition=%s\n"
-    #   %
-    # (inputs, samples, clusters, times, stopping)))
 
     # Run new instance of cmean according to params above
     for i in range(times):
