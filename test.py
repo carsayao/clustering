@@ -1,13 +1,56 @@
-import numpy as np
-import matplotlib.pyplot as plt
-# from ..read import Read
+
 import os
 import sys
-# from random import choices
-# from random import random
-import random
+from pathlib import Path
+sys.path.append("../")
 
-arg = sys.argv[1]
+
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+from read import Read
+from kmeans import Kmean
+from gmm import GMM
+
+# try:
+#     arg = sys.argv[2]
+# except IndexError:
+#     print(f"You need to type '--test' then arg")
+#     sys.exit()
+arg = 'gmm'
+
+
+if arg == 'gmm':
+    from scipy.stats import multivariate_normal
+    
+    # append matrix of matrices
+    X = np.array([[1,2],[3,4],[5,6],[7,8]])
+    u = np.array([[3,4],[4,5]])
+    c = np.array([[.3,.4],[.5,.6]])
+    sub = X-u[0]
+    dot = np.dot((X-u[0]),np.linalg.inv(c))
+    # import pdb; pdb.set_trace()
+
+    # for i in range(1,4):
+    #     cov = np.array([[i,i],[i,i]])
+    #     a.append(b)
+    # print(a)
+
+    gmm = GMM("./data/K-9_means.txt", "./data/K-9_cov.dat")
+    # gmm.gauss(prior, mean, cov, x, dim)
+    prior = .5
+    x = np.array([3,1])
+    mean = np.array([4,2])
+    cov = np.array([[.5,.4],[-.1,.1]])
+    # cov**-1
+    # array([[ 1.11111111, -4.44444444],
+    #        [ 1.11111111,  5.55555556]])
+    # got = gmm.gauss(mean, cov, x)
+    gmm.gmm()
+    # should = multivariate_normal.pdf(x=mean, mean=mean, cov=cov)
+    # print(f"got\n{got}")
+    # print(f"should\n{should}")
+
 
 if arg == 'random':
     # a = [[0,0],
@@ -279,3 +322,44 @@ if arg == 'axis':
     print("d")
     print(d.shape)
     print(d)
+
+if arg == 'paths':
+    path = "./test_dir4/fire/mountain/"
+    try:
+        Path(path).mkdir()
+        print(f"[+] {path} created.")
+    except FileNotFoundError:
+        print(f"[!] {path}'s parent directory does not exist! Defaulting to ./data/.'")
+        path = "./data/"
+        try:
+            Path(path).mkdir(parents=True)
+            print(f"[+] {path} created.")
+        except FileExistsError:
+            print(f"[!] {path} already exists!")
+    except FileExistsError:
+        print(f"[+] {path} already exists.")
+    
+if arg == 'array':
+    # clusters = [np.zeros(2)] * 5 
+    # clusters = np.zeros((5,2))
+
+    print(np.random.randint(5, size=5))
+    print(np.random.choice(5, 5, replace=False))
+
+if arg == 'tuple':
+    listo = []
+    tup = ("hello", .3)
+    listo.append(tup)
+    tu1 = ("goodbye", .5)
+    listo.append(tu1)
+    tu2 = ("welcome", .2)
+    listo.append(tu2)
+    tu3 = ("to the", .4)
+    listo.append(tu3)
+    import pdb; pdb.set_trace()
+    print(f"let me access the array's tuple 'hello'")
+    print(listo[0][0])
+
+
+
+sys.exit()

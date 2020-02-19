@@ -14,7 +14,7 @@ class Read:
         # self.SAMPLES = samples
         # File paths
         self.path = os.path.dirname(os.path.realpath(__file__))
-        self.data_raw = self.path + "/data/rawdata/GMM_data_fall2019.txt"
+        self.data_raw = self.path + "/data/rawdata/GMM_dataset_546.txt"
         self.train_dat = self.path + "/data/train.dat"
 
     # Read raw data from GMM_data_fall2019.txt, return set
