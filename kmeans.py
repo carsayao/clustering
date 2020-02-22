@@ -82,15 +82,12 @@ class Kmean:
             # Else, we just stack x at index
             else:
                 self.clusters[index] = np.vstack((self.clusters[index], x))
-        # import pdb; pdb.set_trace()
-        # for i in range(self.clusters.shape[0]):
-        #     print(self.clusters[i].shape)
     
     # Update centroids
     def update(self):
         # Initialize new centroids
         new_centroids = np.zeros((self.K, self.INPUTS))
-        # Perform update step on all centroids (slide 15 of lecture 9)
+        # Perform update step on all centroids 
         for k in range(len(self.clusters)):
             new_centroids[k] = ((1/self.clusters[k].shape[0])
                               * (np.sum(self.clusters[k], axis=0)))
@@ -106,7 +103,7 @@ class Kmean:
         return d_sum
         
     # Minimize within-cluster sum of squares by findiing loss of the r randomly
-    #   initialized points (slide 12, lecture 9)
+    #   initialized points 
     def wcss(self):
         # Assign data points to clusters
         self.assignment()
@@ -161,7 +158,6 @@ class Kmean:
     # https://jakevdp.github.io/PythonDataScienceHandbook/05.11-k-means.html
     # https://stackoverflow.com/questions/31137077/how-to-make-a-scatter-plot-for-clustering-in-python
     def plot(self, instance, num, data):
-        print("saving fig...")
         fig = plt.figure(figsize=(7,6))
         ax = fig.add_subplot(111)
         title_inf = ("K " + str(self.K)
@@ -173,7 +169,6 @@ class Kmean:
                              c=self.predicts, s=5)
         plt.scatter(self.centroids[:,0],self.centroids[:,1],
                     c='black', s=100, alpha=0.5)
-        # plt.show()
         plt.savefig(self.dir + "K" + str(self.K) + "_"
                   + instance + "_" + num + ".png")
         plt.close(fig)
@@ -187,6 +182,7 @@ def run_kmeans(times, stopping, inputs, start, end, clusters, save_dir):
         centroid_min = []
         end_centroid_min = []
         cov_min = []
+        time = None
 
         print(("\nRunning k-means with inputs=%s, start=%s, end=%s " \
             "clusters=%s, %s times, and stopping condition=%s\n"
@@ -201,16 +197,14 @@ def run_kmeans(times, stopping, inputs, start, end, clusters, save_dir):
                 centroid_min = initial_centroids
                 end_centroid_min = end_centroids
                 cov_min = cov
+                time = j
         
         print(f"initialized points with minimum wcss: {wcss_min} \
                \ncentroid_min\n{centroid_min} \
                \nend_centroids\n{end_centroid_min} \
-               \ncov_min\n{cov_min}")
+               \ncov_min\n{cov_min} \
+               \ntime {time}")
                
-        # print(f"\nMinimum wcss of all: {wcss_min}, with centroids:")
-        # print(centroid_min)
-        # print(f"And covariance:\n{cov_min}")
-
         title = f"{'./data/'}K-{centroid_min.shape[0]}"
         wc = f"{int(wcss_min)}"
         np.savetxt(f"{title}_means.txt",
@@ -223,9 +217,6 @@ def run_kmeans(times, stopping, inputs, start, end, clusters, save_dir):
             for m in cov_min:
                 np.savetxt(f, m, fmt='%-10.5f')
                 f.write('\n')
-        # wcss_min = 1e4
-        # centroid_min = []
-        # cov_min = []
 
 def once(stopping, inputs, start, end, clusters, save_dir):
     run = Kmean(inputs, start, end, clusters, path=save_dir)

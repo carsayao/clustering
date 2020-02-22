@@ -1,0 +1,334 @@
+[+] ./data/plots/ already exists.
+
+Running k-means with inputs=2, start=0, end=1500 clusters=2, 5 times, and stopping condition=0
+
+* kmean on instance 1 *
+wcss 2228.67172566273
+* kmean on instance 2 *
+wcss 2228.619218804037
+* kmean on instance 3 *
+wcss 2228.619218804037
+* kmean on instance 4 *
+wcss 2228.67172566273
+* kmean on instance 5 *
+wcss 2228.619218804037
+initialized points with minimum wcss: 2228.619218804037                
+centroid_min
+[[-0.129  0.353]
+ [-1.026  0.985]]                
+end_centroids
+[[ 1.691  0.088]
+ [-0.518  0.022]]                
+cov_min
+[array([[0.289, 0.025],
+       [0.025, 1.261]]), array([[ 0.549, -0.066],
+       [-0.066,  0.873]])]                
+time 5
+
+Running k-means with inputs=2, start=0, end=1500 clusters=3, 5 times, and stopping condition=0
+
+* kmean on instance 1 *
+wcss 1539.2566749916352
+* kmean on instance 2 *
+wcss 1539.2566749916352
+* kmean on instance 3 *
+wcss 1539.2566749916352
+* kmean on instance 4 *
+wcss 1768.1733623909633
+* kmean on instance 5 *
+wcss 1846.6616151711669
+initialized points with minimum wcss: 1539.2566749916352                
+centroid_min
+[[-0.442 -0.295]
+ [ 1.953  0.926]
+ [ 1.766  1.129]]                
+end_centroids
+[[-0.52   0.039]
+ [ 1.647 -0.851]
+ [ 1.725  1.049]]                
+cov_min
+[array([[ 0.551, -0.048],
+       [-0.048,  0.863]]), array([[ 0.312, -0.016],
+       [-0.016,  0.361]]), array([[0.279, 0.03 ],
+       [0.03 , 0.375]])]                
+time 3
+
+Running k-means with inputs=2, start=0, end=1500 clusters=4, 5 times, and stopping condition=0
+
+* kmean on instance 1 *
+wcss 1395.3749991536965
+* kmean on instance 2 *
+wcss 1231.5115330833369
+* kmean on instance 3 *
+wcss 1395.365192060739
+* kmean on instance 4 *
+wcss 1231.5096687338064
+* kmean on instance 5 *
+wcss 1231.5115330833369
+initialized points with minimum wcss: 1231.5096687338064                
+centroid_min
+[[ 2.572 -1.06 ]
+ [ 1.032  3.02 ]
+ [ 0.022  0.304]
+ [-0.866 -0.332]]                
+end_centroids
+[[ 1.776 -0.893]
+ [ 1.793  1.08 ]
+ [ 0.086 -0.085]
+ [-1.231  0.198]]                
+cov_min
+[array([[0.21 , 0.025],
+       [0.025, 0.381]]), array([[0.224, 0.001],
+       [0.001, 0.384]]), array([[0.166, 0.046],
+       [0.046, 0.219]]), array([[ 0.299, -0.003],
+       [-0.003,  1.767]])]                
+time 4
+
+Running k-means with inputs=2, start=0, end=1500 clusters=5, 5 times, and stopping condition=0
+
+* kmean on instance 1 *
+wcss 773.1365972508618
+* kmean on instance 2 *
+wcss 773.1326716983137
+* kmean on instance 3 *
+wcss 773.1365972508618
+* kmean on instance 4 *
+wcss 959.3759780839592
+* kmean on instance 5 *
+wcss 773.136597250862
+initialized points with minimum wcss: 773.1326716983137                
+centroid_min
+[[-0.144  0.214]
+ [-1.031  1.075]
+ [-0.753 -0.117]
+ [ 2.091  2.454]
+ [ 1.643 -0.123]]                
+end_centroids
+[[ 0.086  0.002]
+ [-1.27   1.284]
+ [-1.158 -1.205]
+ [ 1.795  1.081]
+ [ 1.764 -0.894]]                
+cov_min
+[array([[ 0.166, -0.003],
+       [-0.003,  0.163]]), array([[ 0.323, -0.264],
+       [-0.264,  0.314]]), array([[0.289, 0.247],
+       [0.247, 0.318]]), array([[ 2.217e-01, -5.042e-05],
+       [-5.042e-05,  3.844e-01]]), array([[0.221, 0.026],
+       [0.026, 0.377]])]                
+time 2
+
+Running k-means with inputs=2, start=0, end=1500 clusters=6, 5 times, and stopping condition=0
+
+* kmean on instance 1 *
+wcss 627.0653342587666
+* kmean on instance 2 *
+wcss 626.8985585093277
+* kmean on instance 3 *
+wcss 626.8985585093276
+* kmean on instance 4 *
+wcss 626.8985585093276
+* kmean on instance 5 *
+wcss 696.8984026350583
+initialized points with minimum wcss: 626.8985585093276                
+centroid_min
+[[ 1.96  -0.422]
+ [ 1.804  2.665]
+ [ 0.195  0.013]
+ [-0.192  0.04 ]
+ [ 0.358  0.399]
+ [ 1.005 -0.87 ]]                
+end_centroids
+[[ 1.97   0.127]
+ [ 1.718  1.43 ]
+ [-1.158 -1.205]
+ [-1.27   1.284]
+ [ 0.087  0.01 ]
+ [ 1.662 -1.208]]                
+cov_min
+[array([[ 0.127, -0.002],
+       [-0.002,  0.132]]), array([[0.23 , 0.078],
+       [0.078, 0.225]]), array([[0.289, 0.247],
+       [0.247, 0.318]]), array([[ 0.323, -0.264],
+       [-0.264,  0.314]]), array([[0.166, 0.002],
+       [0.002, 0.164]]), array([[ 0.25 , -0.055],
+       [-0.055,  0.214]])]                
+time 4
+
+Running k-means with inputs=2, start=0, end=1500 clusters=7, 5 times, and stopping condition=0
+
+* kmean on instance 1 *
+wcss 625.536144234981
+* kmean on instance 2 *
+wcss 552.1662264341428
+* kmean on instance 3 *
+wcss 556.5776477380315
+* kmean on instance 4 *
+wcss 558.767490174793
+* kmean on instance 5 *
+wcss 631.466463958663
+initialized points with minimum wcss: 552.1662264341428                
+centroid_min
+[[-0.793 -0.437]
+ [-0.598  0.675]
+ [ 1.951 -0.158]
+ [-1.52   1.159]
+ [ 1.895  2.07 ]
+ [ 1.714 -0.874]
+ [-1.264  1.152]]                
+end_centroids
+[[-1.155 -1.199]
+ [ 0.17  -0.039]
+ [ 1.99   0.123]
+ [-1.818  1.808]
+ [ 1.718  1.43 ]
+ [ 1.672 -1.214]
+ [-0.753  0.758]]                
+cov_min
+[array([[0.289, 0.248],
+       [0.248, 0.32 ]]), array([[0.148, 0.029],
+       [0.029, 0.156]]), array([[0.11 , 0.003],
+       [0.003, 0.132]]), array([[ 0.202, -0.163],
+       [-0.163,  0.232]]), array([[0.23 , 0.078],
+       [0.078, 0.225]]), array([[ 0.244, -0.051],
+       [-0.051,  0.212]]), array([[ 0.1  , -0.041],
+       [-0.041,  0.12 ]])]                
+time 2
+
+Running k-means with inputs=2, start=0, end=1500 clusters=8, 5 times, and stopping condition=0
+
+* kmean on instance 1 *
+wcss 488.18745032427944
+* kmean on instance 2 *
+wcss 492.76423349957355
+* kmean on instance 3 *
+wcss 493.2294040642628
+* kmean on instance 4 *
+wcss 519.224730464191
+* kmean on instance 5 *
+wcss 479.68978814683965
+initialized points with minimum wcss: 479.68978814683965                
+centroid_min
+[[-0.779 -0.985]
+ [-1.642  1.574]
+ [ 2.352 -0.861]
+ [ 0.795 -0.769]
+ [ 1.633 -0.081]
+ [ 0.264 -0.265]
+ [-1.007  0.782]
+ [-2.891  2.662]]                
+end_centroids
+[[-1.421 -1.5  ]
+ [-0.774  0.815]
+ [ 2.001  0.113]
+ [ 1.661 -1.213]
+ [ 1.794  1.463]
+ [ 0.423  0.191]
+ [-0.287 -0.357]
+ [-1.85   1.826]]                
+cov_min
+[array([[0.256, 0.196],
+       [0.196, 0.254]]), array([[ 0.102, -0.045],
+       [-0.045,  0.1  ]]), array([[0.1  , 0.002],
+       [0.002, 0.132]]), array([[ 0.249, -0.055],
+       [-0.055,  0.211]]), array([[0.178, 0.048],
+       [0.048, 0.225]]), array([[0.094, 0.009],
+       [0.009, 0.176]]), array([[0.125, 0.011],
+       [0.011, 0.103]]), array([[ 0.188, -0.162],
+       [-0.162,  0.234]])]                
+time 5
+
+Running k-means with inputs=2, start=0, end=1500 clusters=9, 5 times, and stopping condition=0
+
+* kmean on instance 1 *
+wcss 454.47763090641547
+* kmean on instance 2 *
+wcss 463.2523771992769
+* kmean on instance 3 *
+wcss 447.4904503020404
+* kmean on instance 4 *
+wcss 435.7578985545573
+* kmean on instance 5 *
+wcss 450.32867983952747
+initialized points with minimum wcss: 435.7578985545573                
+centroid_min
+[[ 0.253  0.005]
+ [-1.019 -1.468]
+ [ 0.687 -0.608]
+ [ 0.795 -0.769]
+ [-0.703 -1.132]
+ [ 0.056 -0.503]
+ [-1.062 -1.367]
+ [ 1.819  0.541]
+ [-0.113 -0.023]]                
+end_centroids
+[[ 2.001  0.157]
+ [-1.785 -1.85 ]
+ [ 0.87  -0.798]
+ [ 1.939 -1.294]
+ [-0.108  0.057]
+ [ 0.69   0.617]
+ [-0.798 -0.855]
+ [ 1.839  1.535]
+ [-1.371  1.38 ]]                
+cov_min
+[array([[0.091, 0.012],
+       [0.012, 0.141]]), array([[0.205, 0.167],
+       [0.167, 0.236]]), array([[ 0.106, -0.035],
+       [-0.035,  0.111]]), array([[0.108, 0.   ],
+       [0.   , 0.25 ]]), array([[ 0.107, -0.045],
+       [-0.045,  0.113]]), array([[0.095, 0.021],
+       [0.021, 0.109]]), array([[0.102, 0.037],
+       [0.037, 0.1  ]]), array([[0.153, 0.037],
+       [0.037, 0.209]]), array([[ 0.298, -0.242],
+       [-0.242,  0.295]])]                
+time 4
+
+Running k-means with inputs=2, start=0, end=1500 clusters=10, 5 times, and stopping condition=0
+
+* kmean on instance 1 *
+wcss 392.5746559425114
+* kmean on instance 2 *
+wcss 380.8225657100002
+* kmean on instance 3 *
+wcss 386.2945605577261
+* kmean on instance 4 *
+wcss 387.4721335960058
+* kmean on instance 5 *
+wcss 367.06748152488296
+initialized points with minimum wcss: 367.06748152488296                
+centroid_min
+[[-0.753 -1.409]
+ [-0.784 -0.643]
+ [-0.543 -0.108]
+ [ 2.445  0.676]
+ [-2.383  2.331]
+ [ 1.809 -2.05 ]
+ [-0.502 -0.571]
+ [-0.153  0.079]
+ [-0.703 -1.132]
+ [-1.315  1.078]]                
+end_centroids
+[[-1.652e+00 -1.729e+00]
+ [ 6.453e-02 -4.089e-04]
+ [ 9.321e-01 -8.522e-01]
+ [ 1.941e+00  1.582e+00]
+ [-1.850e+00  1.826e+00]
+ [ 2.013e+00  1.226e-01]
+ [ 1.960e+00 -1.307e+00]
+ [ 9.781e-01  8.235e-01]
+ [-7.111e-01 -7.351e-01]
+ [-7.970e-01  8.304e-01]]                
+cov_min
+[array([[0.221, 0.177],
+       [0.177, 0.232]]), array([[ 8.087e-02, -2.710e-05],
+       [-2.710e-05,  7.645e-02]]), array([[ 0.101, -0.026],
+       [-0.026,  0.108]]), array([[0.124, 0.002],
+       [0.002, 0.22 ]]), array([[ 0.188, -0.162],
+       [-0.162,  0.234]]), array([[0.084, 0.015],
+       [0.015, 0.134]]), array([[0.1  , 0.002],
+       [0.002, 0.252]]), array([[0.123, 0.024],
+       [0.024, 0.119]]), array([[0.089, 0.026],
+       [0.026, 0.097]]), array([[ 0.093, -0.039],
+       [-0.039,  0.098]])]                
+time 5
